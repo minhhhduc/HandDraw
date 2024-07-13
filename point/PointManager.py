@@ -4,6 +4,20 @@ import math
 
 
 class PointManagement:
+    instance = None
+
+    def __new__(cls, imgDraw, colorDraw, colorMove, colorDelete, 
+                 radiusDrawPoint, radiusMove, radiusDeletePoint,
+                 pointsDraw, PointsDelete, maxRadiusCheckPoint):
+        if (cls.instance is None):
+            cls.instance = super(PointManagement, cls).__new__(cls)
+            # cls.instance.imgDraw = imgDraw
+            # cls.instance.maxRadiusCheckPoint = maxRadiusCheckPoint
+            # cls.instance.pointDraw = cls.createPointDraw(colorDraw, radiusDrawPoint, pointsDraw)
+            # cls.instance.pointMove = cls.createPointMove(colorMove, radiusMove)
+            # cls.instance.pointDelete = cls.createPointDelete(colorDelete, radiusDeletePoint, PointsDelete)
+        return cls.instance
+
     def __init__(self, imgDraw, colorDraw, colorMove, colorDelete, 
                  radiusDrawPoint, radiusMove, radiusDeletePoint,
                  pointsDraw, PointsDelete, maxRadiusCheckPoint) -> None:

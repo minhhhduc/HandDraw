@@ -32,7 +32,7 @@ class Decorator:
 class Main:
     def __init__(self) -> None:
         self.radiusDrawPoint = 5
-        self.radiusCheckCollide = 19 
+        self.radiusCheckCollide = 20 
         self.radiusDeletePoint = 45
         self.indexDrawPoint = 8
         self.checkPoint1Idx = 2 * self.radiusCheckCollide
@@ -56,13 +56,13 @@ class Main:
     def initImgDraw(self):
         img = cv2.imread(self.fileDraw)
         h, w, c = img.shape
-        cv2.rectangle(img, (0, 0), (w, h), (0, 0, 0), cv2.FILLED)
-        cv2.imwrite(self.fileDraw, img)
+        cv2.rectangle(self.imgDraw, (0, 0), (w, h), self.colorDelete, cv2.FILLED)
 
     def __main__(self):
         cap = cv2.VideoCapture(0)
         hands = mp.solutions.hands.Hands()
         self.initImgDraw()
+
         while cap.isOpened():
             img = self.readImgCam(cap)
             img = self.decorator.findHand(img, hands)
@@ -71,7 +71,8 @@ class Main:
             cv2.imshow('ImgDraw', self.imgDraw)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-        cv2.imwrite(self.fileDraw, self.imgDraw)        
+        
+        cv2.imwrite(self.fileDraw, self.imgDraw)
         cap.release()
         cv2.destroyAllWindows()
         
